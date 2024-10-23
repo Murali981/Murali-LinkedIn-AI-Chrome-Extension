@@ -1,0 +1,10 @@
+{
+  "extends": "./.wxt/tsconfig.json",
+  "compilerOptions": {
+    "strict": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+
+    "allowImportingTsExtensions": true,
+    "jsx": "react-jsx"
+  }
+}
