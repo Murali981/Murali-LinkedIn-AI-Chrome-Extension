@@ -4,7 +4,9 @@ import "wxt/browser";
 declare module "wxt/browser" {
   export type PublicPath =
     | "/assets/AIIcon.svg"
+    | "/assets/DArrow.svg"
     | "/assets/RArrow.svg"
+    | "/assets/Refresh.svg"
     | "/background.js"
     | "/backupcode.js"
     | "/content-scripts/content.js"
