@@ -741,11 +741,11 @@ video {
 .justify-between {
   justify-content: space-between;
 }
-.justify-items-end {
-  justify-items: end;
-}
 .gap-1 {
   gap: 0.25rem;
+}
+.gap-2 {
+  gap: 0.5rem;
 }
 .gap-4 {
   gap: 1rem;
@@ -856,6 +856,10 @@ video {
   padding-left: 1rem;
   padding-right: 1rem;
 }
+.px-\[20px\] {
+  padding-left: 20px;
+  padding-right: 20px;
+}
 .px-\[24px\] {
   padding-left: 24px;
   padding-right: 24px;
@@ -960,6 +964,9 @@ video {
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
+.outline-0 {
+  outline-width: 0px;
+}
 .blur {
   --tw-blur: blur(8px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -1061,6 +1068,11 @@ video {
 .focus\:ring-\[\#A4ACB9\]:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(164 172 185 / var(--tw-ring-opacity));
+}
+
+.focus-visible\:outline-none:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
 .focus-visible\:ring-0:focus-visible {
