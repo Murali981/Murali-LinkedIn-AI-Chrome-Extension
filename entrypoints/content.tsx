@@ -289,7 +289,7 @@
 ////////////////////////// VERSION - 2 ///////////////////////////////////////////////////////////////////
 
 // src/entrypoints/content.tsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import AIIcon from "../public/assets/AIIcon.svg";
 import "../assets/index.css";
@@ -301,11 +301,22 @@ interface ModalProps {
 const GenerateModal: React.FC<{
   prompt: string;
   onClose: (e: React.MouseEvent) => void;
-}> = ({ prompt, onClose }) => {
+  onInsert: (text: string) => void;
+}> = ({ prompt, onClose, onInsert }) => {
+  const staticTextContainerRef = useRef<HTMLDivElement>(null);
+
   const handleCloseModal = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
       console.log("handleCloseModal called");
       onClose(e);
+    }
+  };
+
+  const handleInsert = () => {
+    console.log("handleInsert called");
+    if (staticTextContainerRef.current) {
+      const staticText = staticTextContainerRef.current.textContent || "";
+      onInsert(staticText);
     }
   };
 
@@ -320,7 +331,10 @@ const GenerateModal: React.FC<{
             {prompt}
           </div>
         </div>
-        <div className="w-[350px] bg-[#DBEAFE] rounded-[4px] p-4 flex flex-col">
+        <div
+          className="w-[350px] bg-[#DBEAFE] rounded-[4px] p-4 flex flex-col"
+          ref={staticTextContainerRef}
+        >
           <div className="font-inter font-[400] text-[14px] leading-[19px] text-[#666D80] flex-1">
             Thank you for the opportunity! If you have any more
           </div>
@@ -337,7 +351,10 @@ const GenerateModal: React.FC<{
           </div>
         </div>
         <div className="flex ml-auto gap-6 ">
-          <div className="h-[30px] rounded-[4px] border-[2px] border-solid px-[8px] py-[8px] gap-[8px] border-[#666D80] flex justify-center items-center">
+          <div
+            className="h-[30px] rounded-[4px] border-[2px] border-solid px-[8px] py-[8px] gap-[8px] border-[#666D80] flex justify-center items-center"
+            onClick={handleInsert}
+          >
             <svg
               width="10"
               height="10"
@@ -382,6 +399,8 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
 
   const [showModal, setShowModal] = useState(false);
 
+  const messageInputRef = useRef<HTMLInputElement>(null);
+
   const handleGenerate = () => {
     setShowModal(true);
   };
@@ -394,6 +413,16 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
   const handleCloseModal = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
       onClose(e);
+    }
+  };
+
+  const handleInsert = (text: string) => {
+    const messageInput = document.querySelector(
+      '[contenteditable="true"][role="textbox"]'
+    );
+    if (messageInput instanceof HTMLElement) {
+      messageInput.textContent = text;
+      messageInput.focus();
     }
   };
 
@@ -429,6 +458,7 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
           placeholder="Your prompt"
+          ref={messageInputRef}
         />
         <div
           className=" h-[30px] rounded-[4px] px-[24px] py-[12px] gap-[10px] bg-[#3B82F6] cursor-pointer ml-auto flex justify-center  items-center "
@@ -453,6 +483,7 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
             <GenerateModal
               prompt={prompt}
               onClose={handleCloseRegenerateModal}
+              onInsert={handleInsert}
             />
           )}
         </div>
