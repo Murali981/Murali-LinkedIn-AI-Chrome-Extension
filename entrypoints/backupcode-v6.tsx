@@ -2,7 +2,6 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import AIIcon from "../public/assets/AIIcon.svg";
 import InputModal from "../components/InputModal";
-import "../assets/index.css";
 
 const ContentApp: React.FC = () => {
   const [isInputFocused, setIsInputFocused] = useState(false);

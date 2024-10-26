@@ -3,6 +3,8 @@ export {}
 declare global {
   const AIIcon: typeof import('F:/ChatGPTWriter-WXT-Framework/wxt-dev-wxt/components/AIIcon')['default']
   const ContentScriptContext: typeof import('wxt/client')['ContentScriptContext']
+  const InputModal: typeof import('F:/ChatGPTWriter-WXT-Framework/wxt-dev-wxt/components/InputModal')['default']
+  const InsertModal: typeof import('F:/ChatGPTWriter-WXT-Framework/wxt-dev-wxt/components/InsertModal')['default']
   const InvalidMatchPattern: typeof import('wxt/sandbox')['InvalidMatchPattern']
   const MatchPattern: typeof import('wxt/sandbox')['MatchPattern']
   const browser: typeof import('wxt/browser')['browser']
@@ -23,6 +25,7 @@ declare global {
   const useContext: typeof import('react')['useContext']
   const useEffect: typeof import('react')['useEffect']
   const useMemo: typeof import('react')['useMemo']
+  const useMessageInput: typeof import('F:/ChatGPTWriter-WXT-Framework/wxt-dev-wxt/hooks/useMessageInput')['default']
   const useReducer: typeof import('react')['useReducer']
   const useRef: typeof import('react')['useRef']
   const useState: typeof import('react')['useState']

@@ -2,6 +2,8 @@
   "globals": {
     "AIIcon": true,
     "ContentScriptContext": true,
+    "InputModal": true,
+    "InsertModal": true,
     "InvalidMatchPattern": true,
     "MatchPattern": true,
     "browser": true,
@@ -22,6 +24,7 @@
     "useContext": true,
     "useEffect": true,
     "useMemo": true,
+    "useMessageInput": true,
     "useReducer": true,
     "useRef": true,
     "useState": true
