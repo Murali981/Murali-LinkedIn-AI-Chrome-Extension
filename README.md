@@ -1,3 +1,7 @@
-# WXT + React
+# This is a LinkedIn AI Reply Chrome Extension built in React + tailwind using WXT framework
 
-This template should help get you started developing with React in WXT.
+
+
+
+https://github.com/user-attachments/assets/6a0345fa-fe30-496e-8a2c-ea20c1b3a575
+
