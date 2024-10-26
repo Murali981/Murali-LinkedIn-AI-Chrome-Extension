@@ -2,7 +2,85 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Reset styles for input[type="text"] elements */
+/* input[type="text"] {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 100%;
+  font-family: inherit;
+  color: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  box-shadow: none;
+} */
+
 #linkedin-ai-reply-root {
   position: relative;
   z-index: 9999;
 }
+
+/* .custom-placeholder::placeholder {
+  color: #a4acb9;
+  font-family: Inter;
+  font-weight: 100;
+  font-size: 15px;
+  line-height: 26px;
+  outline: none;
+} */
+
+/* .input-field {
+  width: 415px;
+  height: 30px;
+  border-radius: 4px;
+  box-shadow: inset 0px 2px 4px 0px rgba(0, 0, 0, 0.06);
+  border: 1px solid #c1c7d0;
+  background-color: #ffffff;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 26px;
+  color: #a4acb9;
+  outline: none;
+}
+
+.input-field:focus {
+  outline: none;
+} */
+
+/* .input-field::placeholder {
+  font-family: "Inter", sans-serif;
+  font-weight: 200;
+  font-size: 15px;
+  line-height: 26px;
+  color: #e20a0a;
+} */
+
+/* .input-field {
+  @apply w-415px h-30px rounded-4 shadow-input border-input bg-input;
+  @apply placeholder:font-inter placeholder:font-400 placeholder:text-input-placeholder placeholder:text-15 placeholder:leading-26;
+  @apply outline-0 focus:outline-0;
+} */
+
+/* @layer components {
+  .input-field {
+    @apply w-415px h-30px rounded-4 shadow-input border-input bg-input;
+    @apply placeholder:font-inter placeholder:font-input-placeholder placeholder:text-input-placeholder placeholder:text-input-placeholder-size placeholder:leading-26;
+    @apply outline-0 focus:outline-0;
+  }
+}
+
+@layer utilities {
+  .placeholder\:text-input-placeholder-size {
+    font-size: 15px;
+  }
+} */

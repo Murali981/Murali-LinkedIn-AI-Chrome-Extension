@@ -1,12 +1,15 @@
 import React, { useRef } from "react";
 
+// Interface defining the props for the InsertModal component
 const InsertModal: React.FC<{
   prompt: string;
   onClose: (e: React.MouseEvent) => void;
   onInsert: (text: string, e: React.MouseEvent) => void;
 }> = ({ prompt, onClose, onInsert }) => {
+  // Create a ref to the container that holds the static text
   const staticTextContainerRef = useRef<HTMLDivElement>(null);
 
+  // Function to handle the closing of the modal when the user clicks outside of it
   const handleCloseModal = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
       console.log("handleCloseModal called");
@@ -14,25 +17,31 @@ const InsertModal: React.FC<{
     }
   };
 
+  // Function to handle the insertion of the static text into the LinkedIn message input field
   const handleInsert = (e: React.MouseEvent) => {
     console.log("handleInsert called");
     if (staticTextContainerRef.current) {
+      // Get the static text content from the container
       const staticText = staticTextContainerRef.current.textContent || "";
+      // Call the onInsert function passed as a prop, passing the static text and the event object
       onInsert(staticText, e);
     }
   };
 
   return (
+    // Render the InsertModal container
     <div
       className="fixed inset-0 bg-black/50 flex items-center justify-center"
       onClick={handleCloseModal}
     >
       <div className="w-[435px] h-[230px] bg-[#F9FAFB] p-4 rounded-[6px] shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.1),0px_2px_4px_-2px_rgba(0,0,0,0.1)] flex flex-col gap-[12px] relative right-[30px] mx-auto">
+        {/* Container for the prompt */}
         <div className=" h-[20px] ml-auto rounded-[6px]  p-6 bg-[#DFE1E7] gap-1 flex justify-center items-center">
           <div className="h-[15px] font-inter font-[200] text-[15px] leading-[12px] text-[#666D80] mr-1">
             {prompt}
           </div>
         </div>
+        {/* Container for the static text content */}
         <div
           className="w-[350px] bg-[#DBEAFE] rounded-[4px] p-4 flex flex-col"
           ref={staticTextContainerRef}
@@ -47,11 +56,13 @@ const InsertModal: React.FC<{
             with, feel free to ask.
           </div>
         </div>
+        {/* Container for the "Your prompt" label */}
         <div className="w-[415px] h-[30px]  rounded-[4px] relative  border border-solid border-[#C1C7D0]  bg-[#FFFFFF] ">
           <div className="w-[351px] h-[25px] absolute top-[1px] left-[6px]    font-inter font-[200] text-[15px] leading-[26px] text-[#A4ACB9]">
             Your prompt
           </div>
         </div>
+        {/* Container for the "Insert" and "Regenerate" buttons */}
         <div className="flex ml-auto gap-6 ">
           <div
             className="h-[30px] rounded-[4px] border-[2px] border-solid px-[8px] py-[8px] gap-[8px] border-[#666D80] flex justify-center items-center"

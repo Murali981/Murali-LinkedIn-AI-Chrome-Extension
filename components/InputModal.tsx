@@ -1,30 +1,38 @@
 import React, { useRef } from "react";
 import InsertModal from "./InsertModal";
+import "../assets/index.css";
 
+// Interface defining the props for the InputModal component
 interface ModalProps {
   onClose: (e: React.MouseEvent) => void;
 }
 
+// The InputModal component that represents the main modal
 const InputModal: React.FC<ModalProps> = ({ onClose }) => {
+  // State variables to manage the prompt and modal visibility
   const [prompt, setPrompt] = useState("");
   const [showModal, setShowModal] = useState(false);
   const messageInputRef = useRef<HTMLInputElement>(null);
 
+  // Function to trigger the display of the modal
   const handleGenerate = () => {
     setShowModal(true);
   };
 
+  // Function to close the GenerateModal when the user clicks outside of it
   const handleCloseRegenerateModal = (e: React.MouseEvent) => {
     e.stopPropagation();
     setShowModal(false);
   };
 
+  // Function to close the entire InputModal when the user clicks outside of it
   const handleCloseModal = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
       onClose(e);
     }
   };
 
+  // Function to handle the insertion of static text into the LinkedIn message input field
   const handleInsert = (text: string, e: React.MouseEvent) => {
     // Clear the placeholder text
     const placeholder = document.querySelector(".msg-form__placeholder");
@@ -32,7 +40,7 @@ const InputModal: React.FC<ModalProps> = ({ onClose }) => {
       placeholder.setAttribute("data-placeholder", "");
     }
 
-    // Insert the static text
+    // Insert the static text into the LinkedIn message input field
     const messageInput = document.querySelector<HTMLDivElement>(
       ".msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate"
     );
@@ -44,19 +52,19 @@ const InputModal: React.FC<ModalProps> = ({ onClose }) => {
     // Close the GenerateModal
     handleCloseRegenerateModal(e);
 
-    // Close the Modal
+    // Close the entire InputModal
     onClose(e);
   };
 
   return (
-    // Outside Modal Container
+    // Render the InputModal container
     <div
       className="fixed inset-0 bg-black/50 flex items-center justify-center"
       onClick={handleCloseModal}
     >
       <div
         className="
-          w-[435px]
+         w-[435px]
           h-[90px]
           bg-[#F9FAFB]
           p-4
@@ -70,12 +78,17 @@ const InputModal: React.FC<ModalProps> = ({ onClose }) => {
           mx-auto
         "
       >
+        {/* Input field for the prompt */}
         <input
-          className="w-[415px] h-[30px] rounded-[4px] shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.06)] border-[#C1C7D0] bg-[#FFFFFF]
-            mx-auto placeholder:font-inter placeholder:font-[400] placeholder:text-[15px]
+          className="w-[415px] h-[30px] rounded-[5px]  bg-[#FFFFFF]
+            mx-auto placeholder:font-inter placeholder:font-[500] placeholder:text-[13px]
             placeholder:leading-[26px] placeholder:text-[#A4ACB9]  
-             outline-0 focus:outline-0
              "
+          style={{
+            border: "1px solid #C1C7D0",
+            boxShadow: "none",
+            outline: "none",
+          }}
           type="text"
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
@@ -83,6 +96,7 @@ const InputModal: React.FC<ModalProps> = ({ onClose }) => {
           ref={messageInputRef}
         />
 
+        {/* Generate button */}
         <div
           className="h-[30px] rounded-[4px] px-[14px] py-[9px] bg-[#3B82F6] cursor-pointer ml-auto flex justify-center items-center"
           onClick={handleGenerate}
@@ -102,6 +116,7 @@ const InputModal: React.FC<ModalProps> = ({ onClose }) => {
           <span className="ml-2 font-inter font-[600] text-[15px] leading-[26px] text-[#FFFFFF]">
             Generate
           </span>
+          {/* Render the InsertModal component if the showModal state is true */}
           {showModal && (
             <InsertModal
               prompt={prompt}

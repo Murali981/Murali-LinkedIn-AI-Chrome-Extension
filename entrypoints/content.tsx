@@ -4,26 +4,31 @@ import AIIcon from "../public/assets/AIIcon.svg";
 import InputModal from "../components/InputModal";
 import "../assets/index.css";
 
+// The main application component
 const ContentApp: React.FC = () => {
+  // State variables to track input focus and modal state
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [iconPosition, setIconPosition] = useState({ top: 0, left: 0 });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Function to close the modal and reset the modal state
   function handleCloseModal(e: React.MouseEvent) {
     e.stopPropagation();
     setIsModalOpen(false);
   }
 
+  // UseEffect hook to set up event listeners for the message input field
   useEffect(() => {
     const messageInputSelector = '[contenteditable="true"][role="textbox"]';
 
+    // Function to handle focus on the message input field
     const handleFocus = (event: Event) => {
       const inputElement = event.target as HTMLElement;
       const rect = inputElement.getBoundingClientRect();
 
       console.log("Input element rect:", rect);
 
-      // Position the icon at the bottom-right of the input field
+      // Position the AI icon at the bottom-right of the input field
       setIconPosition({
         top: rect.bottom - 20,
         left: rect.right - 21,
@@ -31,6 +36,7 @@ const ContentApp: React.FC = () => {
       setIsInputFocused(true);
     };
 
+    // Function to handle blur (loss of focus) on the message input field
     const handleBlur = (event: Event) => {
       const relatedTarget = (event as FocusEvent).relatedTarget as HTMLElement;
       if (relatedTarget?.closest("#linkedin-ai-reply-root")) {
@@ -39,12 +45,13 @@ const ContentApp: React.FC = () => {
       setIsInputFocused(false);
     };
 
+    // Function to set up the focus and blur event listeners on the message input field
     const setupListeners = (element: Element) => {
       element.addEventListener("focus", handleFocus as EventListener);
       element.addEventListener("blur", handleBlur as EventListener);
     };
 
-    // Watch for input field
+    // Observe the DOM for changes and set up event listeners on the message input field
     const observer = new MutationObserver(() => {
       const messageInput = document.querySelector(messageInputSelector);
       if (messageInput) {
@@ -58,17 +65,19 @@ const ContentApp: React.FC = () => {
       subtree: true,
     });
 
-    // Initial check
+    // Initial check for the message input field and set up event listeners
     const messageInput = document.querySelector(messageInputSelector);
     if (messageInput) {
       setupListeners(messageInput);
     }
 
+    // Clean up the observer when the component is unmounted
     return () => {
       observer.disconnect();
     };
   }, []);
 
+  // Function to render the AI icon button and the InputModal component
   const renderAIIcon = () => {
     return (
       <>
@@ -93,8 +102,10 @@ const ContentApp: React.FC = () => {
     );
   };
 
+  // If the input field is not focused, don't render anything
   if (!isInputFocused) return null;
 
+  // Render the AI icon button at the bottom-right of the input field
   return (
     <div
       className="fixed z-50"
@@ -108,15 +119,18 @@ const ContentApp: React.FC = () => {
   );
 };
 
+// Define the content script that will be injected into the LinkedIn page
 export default defineContentScript({
   matches: ["*://*.linkedin.com/*"],
   main() {
     console.log("Content script initialized");
     try {
+      // Create a container element for the application
       const container = document.createElement("div");
       container.id = "linkedin-ai-reply-root";
       document.body.appendChild(container);
 
+      // Render the main application component
       const root = createRoot(container);
       root.render(React.createElement(ContentApp));
     } catch (error) {

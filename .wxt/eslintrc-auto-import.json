@@ -24,7 +24,6 @@
     "useContext": true,
     "useEffect": true,
     "useMemo": true,
-    "useMessageInput": true,
     "useReducer": true,
     "useRef": true,
     "useState": true
