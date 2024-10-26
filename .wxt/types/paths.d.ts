@@ -12,6 +12,7 @@ declare module "wxt/browser" {
     | "/backupcode-v2.js"
     | "/backupcode-v3.js"
     | "/backupcode-v4.js"
+    | "/backupcode-v5.js"
     | "/content-scripts/content.js"
     | "/icon/128.png"
     | "/icon/16.png"
